@@ -15,20 +15,35 @@ def check_word():
 
     while attempt > 0:
         guess = input("Guess today's word: ")
+
         if guess == hidden_word:
             print("You guessed the word correctly! Congratulations!")
             break
         else:
             attempt = attempt - 1
-            print(f"Oops, that is not the correct word. You have {attempt} attempt(s) remaining \n")
+            print(f"Oops, that is not the correct word. You have {attempt} attempt(s) remaining")
+            for char, word in zip(hidden_word, guess):
+                if char!=hidden_word[-1]:
+                    print(word, end=" ")
+                else:
+                    print(word)
+
             for char, word in zip(hidden_word, guess):
                 if word in hidden_word and word in char:
-                    print(word + " ✔ ")
-
+                    if char!=hidden_word[-1]:
+                        print("✔", end=" ")
+                    else:
+                        print("✔")
                 elif word in hidden_word:
-                    print(word, " ➕ ")
+                    if char!=hidden_word[-1]:
+                        print("➕", end="")
+                    else:
+                        print("➕")
                 else:
-                    print(word, " ❌ ")
+                    if char!=hidden_word[-1]:
+                        print("❌", end="")    
+                    else:
+                        print("❌")
 
                 if attempt == 0:
                     print("Game Over!!")
